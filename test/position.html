@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Position 예제</title>
+    <style>
+      body {
+        height: 2000px; /* 스크롤 테스트 */
+        padding: 20px;
+      }
+
+      .container {
+        position: relative; /* absolute 예시 기준 컨테이너 */
+        width: 400px;
+        height: 300px;
+        border: 2px solid black;
+        margin-bottom: 50px;
+      }
+
+      .box {
+        width: 100px;
+        height: 100px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 1. static */
+      .static {
+        position: static; /* 기본값 */
+        background: gray;
+      }
+
+      /* 2. relative */
+      .relative {
+        position: relative;
+        top: 20px; /* 아래로 이동 */
+        left: 20px; /* 오른쪽으로 이동 */
+        background: blue;
+      }
+
+      /* 3. absolute */
+      .absolute {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: green;
+      }
+
+      /* 4. fixed */
+      .fixed {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: red;
+      }
+
+      /* 5. sticky */
+      .sticky {
+        position: sticky;
+        top: 10px; /* 스크롤 시 10px 아래에서 고정 */
+        background: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>1. static (기본)</h2>
+    <div class="container">
+      <div class="box static">Static</div>
+    </div>
+
+    <h2>2. relative (원래 위치 기준 이동)</h2>
+    <div class="container">
+      <div class="box relative">Relative</div>
+    </div>
+
+    <h2>3. absolute (조상 기준)</h2>
+    <div class="container">
+      <div class="box absolute">Absolute</div>
+    </div>
+
+    <h2>4. fixed (뷰포트 고정)</h2>
+    <div class="container">
+      <div class="box fixed">Fixed</div>
+    </div>
+
+    <h2>5. sticky (스크롤 시 고정)</h2>
+    <div class="container" style="height: 600px">
+      <div class="box sticky">Sticky</div>
+    </div>
+  </body>
+</html>
