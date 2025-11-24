@@ -18,7 +18,7 @@ int main(void) {
     int count = 0;
     // a[0] ~ a[4]까지 확인하면서 나누어 떨어지면 count++
     for (int j = 0; j < 5; j++) {
-      if (arr[j] % i == 0) {
+      if (i % arr[j] == 0) {
         count++;
       }
     }

@@ -11,6 +11,7 @@ int main(void) {
   vector<bool> isPrime(n + 1, true);
   if (n >= 0) isPrime[0] = false;
   if (n >= 1) isPrime[1] = false;
+  // n^(1/2)까지 돌면서 배수들을 지운다.
   for (int i = 2; i * i <= n; i++) {
     if (isPrime[i]) {
       for (int j = i * i; j <= n; j += i) {
