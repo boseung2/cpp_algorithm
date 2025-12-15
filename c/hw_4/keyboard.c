@@ -14,7 +14,7 @@ void enable_raw_mode() {
     atexit(disable_raw_mode);
 
     struct termios raw = orig_termios;
-    raw.c_lflag &= ~(ECHO | ICANON); // no echo, no canonical mode
+    raw.c_lflag &= ~(ECHO | ICANON);
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
 
@@ -47,8 +47,9 @@ void print_space(int x) {
         printf(" ");
 }
 
-void print_man(int x, int frame, int y_offset) {
-    for (int i = 0; i < y_offset; i++) printf("\n");
+void print_man(int x, int frame) {
+    for (int i = 0; i < 7; i++) printf("\n");
+
     if(frame % 2 == 0) {
         print_space(x); printf(" @ \n");
         print_space(x); printf("|||\n");
@@ -60,6 +61,20 @@ void print_man(int x, int frame, int y_offset) {
         print_space(x); printf(" | \n");
         print_space(x); printf("/ -\n");
     }
+    fflush(stdout);
+}
+
+void print_man_jump(int x, int frame, int jump_height) {
+    int delta = (jump_height <= 6) ? jump_height : (12 - jump_height);
+    int y_offset = 7 - delta;
+
+    for (int i = 0; i < y_offset; i++) printf("\n");
+
+    print_space(x); printf(" @ \n");
+    print_space(x); printf("-|-\n");
+    print_space(x); printf(" | \n");
+    print_space(x); printf("/ -\n");
+    
     fflush(stdout);
 }
 
@@ -75,10 +90,7 @@ int main(void) {
         if (jumping) {
             clear_screen();
 
-            int delta = (jump_height <= 6) ? jump_height : (12 - jump_height);
-            int y_offset = 7 - delta;
-
-            print_man(x, 1, y_offset);
+            print_man_jump(x, 1, jump_height);
             usleep(200000);
 
             jump_height++;
@@ -90,7 +102,7 @@ int main(void) {
         }
 
         clear_screen();
-        print_man(x, frame, 7);
+        print_man(x, frame);
 
         int key = read_key();
 
